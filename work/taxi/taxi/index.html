@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8" />
+        <script src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script>
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showCurrentLocation);
+            } else {
+               alert("Geolocation API not supported.");
+            }
+            
+      function geocodeLatLng(latitude, longitude) {
+            var geocoder = new google.maps.Geocoder;
+        var latlng = {lat: latitude, lng: longitude};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[1]) {
+              for(res in results) { console.log(results[res].formatted_address); }
+              document.getElementById("pickupAddress").value = results[0].formatted_address;
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+
+
+            function showCurrentLocation(position)
+            {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var coords = new google.maps.LatLng(latitude, longitude);
+
+                var mapOptions = {
+                zoom: 15,
+                center: coords,
+                mapTypeControl: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            //create the map, and place it in the HTML map div
+            map = new google.maps.Map(
+            document.getElementById("mapPlaceholder"), mapOptions
+            );
+
+            //place the initial marker
+            var marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            title: "Current location!"
+            });
+            geocodeLatLng(latitude, longitude)
+map.addListener('dragstart', function() {
+    marker.setVisible(false);
+});
+map.addListener('dragend', function() {
+    var center = map.getCenter();
+    marker.setPosition(center);
+    marker.setVisible(true);
+    geocodeLatLng(center.lat(), center.lng())
+});
+            }
+        </script>
+    </head>
+    <style>
+    html {
+        height: 100vh;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    #mapPlaceholder {
+        height: 100vh;
+        width: 100%;
+    }
+    #currentLocForm {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 50px;
+        z-index: 100;
+    }
+    #pickupAddress {
+        width: 90%;
+        padding: 0 5%;
+        height: 46px;
+        border: none;
+    }
+    #requestTaxiForm {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        z-index: 100;
+    }
+    #requestTaxiBtn {
+        width: 100%;
+        border: none;
+        background: #0ddb47;
+        text-align: center;
+        line-height: 50px;
+        height: 50px;
+    }
+    #shadow {
+        width: 40px;
+        height: 2px;
+        background: 40px;
+        box-shadow: 2px 0 3px #333;
+        background: #000;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+    }
+    </style>
+    <body>
+        <div>
+	<form id="currentLocForm">
+		<input type="text" name="pickupAddress" id="pickupAddress" placeholder="Enter pickup address" />
+	</form>
+        <div id="mapPlaceholder"></div>
+        <form id="requestTaxiForm">
+            <input type="submit" value="Request" id="requestTaxiBtn" />
+        </div>
+        <div id="shadow"></div>
+    </body>
+</html>
