@@ -1,0 +1,25 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+}
+img {
+	border: none;
+}
+:focus {
+	outline: none;
+}
+ul, li {
+	list-type: none;
+}
+body {
+	background: #000;
+	color: #fff;
+}
+
+#game {
+	margin: auto;
+	display: block;
+}

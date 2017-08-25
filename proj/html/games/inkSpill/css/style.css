@@ -1,0 +1,65 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	border: none;
+}
+
+*:focus {
+	outline: none;
+}
+
+ul, li {
+	list-style: none;
+}
+
+#inkSpillBoard {
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+#inkSpillBoard span {
+	width: 20px;
+	height: 20px;
+	float: left;
+	border-left: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+#reloadInkSpill {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	width: 200px;
+	margin: 10px auto;
+	cursor: pointer;
+	background: #333;
+	color: #fff;
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.5);
+	border-radius: 5px;
+}
+#reloadInkSpill:hover {
+	background: #555;
+	box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+}
+#reloadInkSpill:focus {
+	background: #999;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+#colorButtons {
+	margin: 0 auto;
+	overflow: hidden;
+	background: #f1f1f1;
+}
+#colorButtons span {
+	float: left;
+	width: 40px;
+	height: 40px;
+	border: 2px solid #eee;
+	border-radius: 5px;
+}
