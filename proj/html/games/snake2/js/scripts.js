@@ -12,6 +12,7 @@ var KEY_LEFT = 37;
 var KEY_UP = 38;
 var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
+var PAUSE_PLAY = 32; //Space bar
 
 
 
@@ -142,6 +143,13 @@ function main() {
 			case KEY_DOWN:
 				if(snake.direction !== UP) snake.direction = DOWN;
 				break;
+			case PAUSE_PLAY:
+				if(frames == 0) {
+					loop();
+				} else {
+					pause();
+				}
+				break;
 		}
 	});
 
@@ -172,7 +180,8 @@ function draw() {
 
 function update() {
 	var head = snake.move();
-	if((head.x < 1) || (head.x > cols) || (head.y < 0) || (head.y > rows)) {
+	if((head.x < 1) || (head.x > cols - 2) || (head.y < 1) || (head.y > rows - 2)) {
+		console.log(head);
 		resetBoard();
 	}
 }
