@@ -1,0 +1,39 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul, li {
+	list-style: none;
+}
+
+:focus {
+	outline: none;
+}
+
+img {
+	border: none;
+}
+
+#pageContent {
+	overflow: hidden;
+}
+
+#player {
+	float: left;
+	width: 80%;
+}
+
+#pageContent > div {
+	height: 500px;
+}
+
+#playList {
+	background-color: #f1f1f1;
+	float: right;
+	width: 20%;
+}
